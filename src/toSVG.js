@@ -152,7 +152,7 @@ const bboxEllipseOrArc = (cx, cy, majorX, majorY, axisRatio, startAngle, endAngl
   // Transformation matrix, formed by the major and minor axes
   const M =
     [[majorX, -majorY * axisRatio],
-      [majorY, majorX * axisRatio]]
+    [majorY, majorX * axisRatio]]
 
   // Rotate, scale, and translate points
   const rotatedPts = pts.map(p => ({
@@ -271,7 +271,14 @@ export default (parsed) => {
         acc.bbox.expandByPoint(bbox.min)
         acc.bbox.expandByPoint(bbox.max)
       }
-      acc.elements.push(`<g stroke="${rgbToColorAttribute(rgb)}">${element}</g>`)
+
+      let strokeDashArray = ''
+
+      if (entity.lineTypeName && entity.lineTypeName.toLowerCase() !== 'continuous') {
+        strokeDashArray = 'stroke-dasharray="5,5"'
+      }
+
+      acc.elements.push(`<g stroke="${rgbToColorAttribute(rgb)}" ${strokeDashArray}>${element}</g>`)
     }
     return acc
   }, {

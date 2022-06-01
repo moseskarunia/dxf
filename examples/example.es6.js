@@ -4,7 +4,7 @@ import { join } from 'path'
 import { Helper } from '../src'
 
 const helper = new Helper(fs.readFileSync(
-  './test/resources/Ceco.NET-Architecture-Tm-53.dxf', 'utf-8'))
+  './test/resources/sample2.dxf', 'utf-8'))
 
 // The parsed entities
 const { blocks, entities } = helper.parsed
